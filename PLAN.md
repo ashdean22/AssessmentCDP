@@ -338,7 +338,7 @@ Churn tiers: Active (70+), Cooling (40 to 69), At risk (15 to 39), Cold (under 1
 - [x] **Thu Oct 8 — Login and lookup.**
 - [x] **Fri Oct 9 to Sat Oct 10 — Filter builder,** segment table, CSV export.
 - [x] **Sun Oct 11 to Mon Oct 12 — Webhook,** stitching, send-event script, tests.
-- [ ] **Tue Oct 13 to Wed Oct 14 — AI chat,** tools, PII guard, tests.
+- [x] **Tue Oct 13 to Wed Oct 14 — AI chat,** tools, PII guard, tests.
 - [ ] **Thu Oct 15 — Vapi voice.**
 - [ ] **Fri Oct 16 — Dashboard,** engagement score, beehiiv mock.
 - [ ] **Sat Oct 17 — Lock down.** Security pass, README, CI, keep-alive, self-audit. Rehearse the Loom.

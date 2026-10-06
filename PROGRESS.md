@@ -42,4 +42,13 @@ Running log of what's done against PLAN.md. Updated each phase.
 - `scripts/send-event.ts` (`npm run send-event -- all --url …`): normal, duplicate, out-of-order, anon-then-login, unknown-user, bad-signature, bad-body — all behave as specified
 - Tests: 46 passing (+5 verify/schema unit, +3 DB integration gated on env)
 
-## Tue Oct 13 – Wed Oct 14 — AI chat ⏳
+## Tue Oct 13 – Wed Oct 14 — AI chat ✅ (done Oct 6)
+- `lib/pii/guard.ts` — email regex + forbidden-key scan on every tool output (fail closed); `[EMAIL]` redaction of user text
+- `lib/ai/tools.ts` — 8 tools (count_segment, build_segment, top_engaged, source_quality, first_pages, app_newsletter_overlap, trend, get_definitions); lists parked in `ai_results`, model gets `result_id` + masked `sub_` ids only
+- DB: `source_quality`, `first_pages`, `app_newsletter_overlap`, `trend`, `dashboard_stats` (service-role only)
+- `app/api/chat` — Vercel AI SDK v7 + `@ai-sdk/anthropic` (claude-sonnet-5-5), streaming, up to 6 tool steps; `app/api/results/[id]` serves full tables behind login
+- UI `/assistant`: starter chips, markdown + tables, inline trend chart (Recharts), result table with Save/Export, "What the AI saw" panel per tool call, stop/regenerate/new chat/copy
+- Tests: 59 passing (+guard unit, +8 "every tool output is email-free" against real data)
+- Verified: "Instagram went cold last month" → count_segment → 69; typed email redacted; zero emails in stream
+
+## Thu Oct 15 — Vapi voice ⏳
