@@ -11,12 +11,14 @@
     "profile": "tsx scripts/profile-data.ts",
     "import": "tsx --tsconfig tsconfig.json scripts/import.ts",
     "typecheck": "tsc --noEmit",
-    "send-event": "tsx --tsconfig tsconfig.json scripts/send-event.ts"
+    "send-event": "tsx --tsconfig tsconfig.json scripts/send-event.ts",
+    "vapi-assistant": "tsx --tsconfig tsconfig.json --conditions react-server scripts/vapi-assistant.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.72",
     "@ai-sdk/react": "^4.0.131",
     "@supabase/supabase-js": "^2.117.2",
+    "@vapi-ai/web": "^2.7.1",
     "ai": "^7.0.128",
     "csv-parse": "^7.0.3",
     "next": "16.3.8",

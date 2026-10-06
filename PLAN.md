@@ -249,12 +249,12 @@ In `lib/metrics.ts` and the system prompt. The AI always states which definition
 
 ### ChatGPT-level chat checklist
 
-- [ ] Answers stream word by word, with markdown and tables
-- [ ] Charts render inline in the reply
-- [ ] Each answer shows what ran ("source = instagram AND last open 31 to 60 days ago")
-- [ ] Starter chips with the 5 Growth questions
-- [ ] Follow-ups keep context ("now only the ones with the app")
-- [ ] Stop, copy, regenerate and new chat buttons
+- [x] Answers stream word by word, with markdown and tables
+- [x] Charts render inline in the reply
+- [x] Each answer shows what ran ("source = instagram AND last open 31 to 60 days ago")
+- [x] Starter chips with the 5 Growth questions
+- [x] Follow-ups keep context ("now only the ones with the app")
+- [x] Stop, copy, regenerate and new chat buttons
 - [ ] Result buttons: save segment, export CSV, push to beehiiv
 
 ### Voice (Vapi)
@@ -303,23 +303,23 @@ Churn tiers: Active (70+), Cooling (40 to 69), At risk (15 to 39), Cold (under 1
 
 ### Security checklist
 
-- [ ] Password login, httpOnly + secure session cookie; middleware locks everything except `/webhooks/app`, `/api/vapi/tools`, `/api/health`
-- [ ] Webhook: HMAC-SHA256 over `timestamp + body`, constant-time compare, 5-minute replay window, body size limit
-- [ ] Vapi tool route checks Vapi's secret header
+- [x] Password login, httpOnly + secure session cookie; middleware locks everything except `/webhooks/app`, `/api/vapi/tools`, `/api/health`
+- [x] Webhook: HMAC-SHA256 over `timestamp + body`, constant-time compare, 5-minute replay window, body size limit
+- [x] Vapi tool route checks Vapi's secret header
 - [ ] Secrets only in Vercel env vars; `.env.example` with fake values
-- [ ] Supabase service key server-only; RLS on every table, no public policies
-- [ ] AI: tools only, PII guard, data treated as text never instructions
-- [ ] CSV export escaping
+- [x] Supabase service key server-only; RLS on every table, no public policies
+- [x] AI: tools only, PII guard, data treated as text never instructions
+- [x] CSV export escaping
 - [ ] Stretch: rate limiting on webhook and login
 
 ### Tests (Vitest)
 
-- [ ] `normalizeEmail` handles capitals, spaces, invalid emails
-- [ ] Dedupe keeps the right dates, status and source
-- [ ] Web visits and app users link correctly, including visitor stitching
-- [ ] Filter compiler: nested AND/OR works; unknown fields rejected
-- [ ] Webhook: bad signature 401, duplicate ignored, out-of-order sorted, anonymous-then-login attached, unknown user gets a stub
-- [ ] PII guard: no tool output contains an email
+- [x] `normalizeEmail` handles capitals, spaces, invalid emails
+- [x] Dedupe keeps the right dates, status and source
+- [x] Web visits and app users link correctly, including visitor stitching
+- [x] Filter compiler: nested AND/OR works; unknown fields rejected
+- [x] Webhook: bad signature 401, duplicate ignored, out-of-order sorted, anonymous-then-login attached, unknown user gets a stub
+- [x] PII guard: no tool output contains an email
 
 ### Deployment
 
@@ -339,7 +339,7 @@ Churn tiers: Active (70+), Cooling (40 to 69), At risk (15 to 39), Cold (under 1
 - [x] **Fri Oct 9 to Sat Oct 10 — Filter builder,** segment table, CSV export.
 - [x] **Sun Oct 11 to Mon Oct 12 — Webhook,** stitching, send-event script, tests.
 - [x] **Tue Oct 13 to Wed Oct 14 — AI chat,** tools, PII guard, tests.
-- [ ] **Thu Oct 15 — Vapi voice.**
+- [x] **Thu Oct 15 — Vapi voice.**
 - [ ] **Fri Oct 16 — Dashboard,** engagement score, beehiiv mock.
 - [ ] **Sat Oct 17 — Lock down.** Security pass, README, CI, keep-alive, self-audit. Rehearse the Loom.
 - [ ] **Sun Oct 18 — Record and submit.**
