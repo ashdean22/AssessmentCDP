@@ -10,10 +10,10 @@ Build a password-protected web app that merges TPO's three subscriber files into
 
 Done means:
 
-- [ ] Live URL and webhook URL both work
-- [ ] All 5 required features work: pull together, find anyone, build a segment, never sleeps, talks back
+- [x] Live URL and webhook URL both work
+- [x] All 5 required features work: pull together, find anyone, build a segment, never sleeps, talks back
 - [x] Creative extras work: voice assistant, visual dashboard, engagement and churn-risk score, segment export
-- [ ] GitHub repo with a README that runs locally
+- [x] GitHub repo with a README that runs locally
 - [ ] Self-audit output pasted unedited
 - [ ] Loom video, 5 to 8 minutes
 
@@ -306,7 +306,7 @@ Churn tiers: Active (70+), Cooling (40 to 69), At risk (15 to 39), Cold (under 1
 - [x] Password login, httpOnly + secure session cookie; middleware locks everything except `/webhooks/app`, `/api/vapi/tools`, `/api/health`
 - [x] Webhook: HMAC-SHA256 over `timestamp + body`, constant-time compare, 5-minute replay window, body size limit
 - [x] Vapi tool route checks Vapi's secret header
-- [ ] Secrets only in Vercel env vars; `.env.example` with fake values
+- [x] Secrets only in Vercel env vars; `.env.example` with fake values
 - [x] Supabase service key server-only; RLS on every table, no public policies
 - [x] AI: tools only, PII guard, data treated as text never instructions
 - [x] CSV export escaping

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -17,7 +18,9 @@ export const metadata: Metadata = {
   description: "One profile per reader: newsletter, web and app.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+// Explicit props type: the generated `LayoutProps` global only exists after a
+// local `next dev`/`next build`, so relying on it broke `tsc` in CI.
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
