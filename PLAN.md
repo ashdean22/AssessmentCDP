@@ -12,7 +12,7 @@ Done means:
 
 - [ ] Live URL and webhook URL both work
 - [ ] All 5 required features work: pull together, find anyone, build a segment, never sleeps, talks back
-- [ ] Creative extras work: voice assistant, visual dashboard, engagement and churn-risk score, segment export
+- [x] Creative extras work: voice assistant, visual dashboard, engagement and churn-risk score, segment export
 - [ ] GitHub repo with a README that runs locally
 - [ ] Self-audit output pasted unedited
 - [ ] Loom video, 5 to 8 minutes
@@ -255,7 +255,7 @@ In `lib/metrics.ts` and the system prompt. The AI always states which definition
 - [x] Starter chips with the 5 Growth questions
 - [x] Follow-ups keep context ("now only the ones with the app")
 - [x] Stop, copy, regenerate and new chat buttons
-- [ ] Result buttons: save segment, export CSV, push to beehiiv
+- [x] Result buttons: save segment, export CSV, push to beehiiv
 
 ### Voice (Vapi)
 
@@ -340,7 +340,7 @@ Churn tiers: Active (70+), Cooling (40 to 69), At risk (15 to 39), Cold (under 1
 - [x] **Sun Oct 11 to Mon Oct 12 — Webhook,** stitching, send-event script, tests.
 - [x] **Tue Oct 13 to Wed Oct 14 — AI chat,** tools, PII guard, tests.
 - [x] **Thu Oct 15 — Vapi voice.**
-- [ ] **Fri Oct 16 — Dashboard,** engagement score, beehiiv mock.
+- [x] **Fri Oct 16 — Dashboard,** engagement score, beehiiv mock.
 - [ ] **Sat Oct 17 — Lock down.** Security pass, README, CI, keep-alive, self-audit. Rehearse the Loom.
 - [ ] **Sun Oct 18 — Record and submit.**
 

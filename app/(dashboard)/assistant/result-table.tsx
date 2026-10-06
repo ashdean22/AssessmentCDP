@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { TIER_LABEL } from "@/lib/score";
+import { BeehiivPush } from "../beehiiv-push";
 
 type Row = { id: number; email: string; status: string; source: string; signup_date: string | null; last_open_date: string | null; engagement_score: number | null; churn_tier: string | null };
 type Result = { kind: string; rows: Row[]; meta: { name?: string; filter?: unknown; description?: string } };
@@ -52,7 +53,7 @@ export function ResultTable({ resultId }: { resultId: string }) {
         {data.meta.filter != null && <>
           <button className={btn} onClick={save}>Save segment</button>
           <button className={btn} onClick={exportCsv}>Export CSV</button>
-          <button className={btn} disabled title="Mock arrives Oct 16">Push to beehiiv</button>
+          <BeehiivPush filter={data.meta.filter} name={name} className={btn} />
         </>}
         {notice && <span className="text-emerald-600">{notice}</span>}
       </div>

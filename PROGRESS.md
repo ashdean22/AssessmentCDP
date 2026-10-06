@@ -51,4 +51,16 @@ Running log of what's done against PLAN.md. Updated each phase.
 - Tests: 59 passing (+guard unit, +8 "every tool output is email-free" against real data)
 - Verified: "Instagram went cold last month" → count_segment → 69; typed email redacted; zero emails in stream
 
-## Thu Oct 15 — Vapi voice ⏳
+## Thu Oct 15 — Vapi voice ✅ (done Oct 6)
+- `app/api/vapi/tools` — Vapi function-tool webhook: `x-vapi-secret` constant-time check, same `runTool` + PII guard as chat; unknown tools (email lookups) refused with a pointer to the Lookup page
+- `app/(dashboard)/assistant/voice.tsx` — `useVoice` hook on `@vapi-ai/web`; mic button in the chat panel; live transcript bubbles; `show_result` is a client-side tool (no server URL) rendered in the browser, nothing returned to the model
+- `scripts/vapi-assistant.ts` (`npm run vapi-assistant -- --url …`) creates/updates the assistant from `lib/ai/tools.ts` so voice and chat tools never drift (assistant `4c63346d…`, claude-sonnet-4-5 in Vapi, 8 server tools + show_result)
+- Verified live: 401 without/with wrong secret; count_segment → 69 with the secret
+- Tests: 63 passing (+4 vapi route)
+
+## Fri Oct 16 — Dashboard, score, beehiiv mock ✅ (done Oct 6)
+- `app/(dashboard)/page.tsx` — cards (readers, % active, % cold, app users, events today), churn-tier bar, signups by source, last-open-by-week line (labelled as such), signups by week, first pages (horizontal bar), live event feed (`/api/events/recent`, polls every 4 s, newest arrivals)
+- Engagement score + churn tier were already live from Oct 8/9 (`lib/score.ts`, recomputed on every webhook event)
+- "Reach out before they're gone": one-click save of the At-risk segment; `POST /api/winback` drafts an email with `claude-sonnet-5-5` from `lib/winback.ts` aggregates only (guarded by `assertNoPii`, shown in a "What the AI saw" panel); Copy button
+- beehiiv push = **mock**: `lib/beehiiv.ts` builds the real per-subscriber `POST /v2/publications/{id}/subscriptions` bodies; `POST /api/beehiiv/push` logs a summary and returns the plan; UI shows a "Mock mode" panel in the segment builder, AI result tables and the win-back card. Nothing is sent.
+- Tests: 69 passing (+3 beehiiv, +3 win-back stats)

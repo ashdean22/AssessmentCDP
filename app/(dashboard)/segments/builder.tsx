@@ -6,6 +6,7 @@ import { FIELD_META, type Filter, type Group, type Rule } from "@/lib/segments/f
 import { SOURCES, STATUSES } from "@/lib/normalize";
 import { APP_EVENT_TYPES } from "@/lib/config";
 import { CHURN_TIERS, TIER_LABEL } from "@/lib/score";
+import { BeehiivPush } from "../beehiiv-push";
 
 type Node = Rule | Group;
 const isGroup = (n: Node): n is Group => (n as Group).op !== undefined;
@@ -126,7 +127,7 @@ export function SegmentBuilder({
           <button className={primaryBtn} onClick={preview} disabled={busy || !!error}>Show table</button>
           <button className={primaryBtn} onClick={save} disabled={busy || !!error}>Save</button>
           <button className={primaryBtn} onClick={exportCsv} disabled={busy || !!error}>Export CSV</button>
-          <button className={`${primaryBtn} opacity-60`} title="Mock arrives Oct 16" disabled>Push to beehiiv</button>
+          <BeehiivPush filter={filter} name={name || description.slice(0, 80) || "segment"} className={primaryBtn} />
           {notice && <span className="text-xs text-emerald-600">{notice}</span>}
         </div>
 
