@@ -1,27 +1,79 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/*
+ * The Pour Over look: Poppins, coral accent (#F2817D), espresso text
+ * (#3F322B), airy white with soft warm-gray panels and generous radii.
+ * The `neutral` scale is re-tinted warm so every existing neutral-* class
+ * picks the brand up without touching each component.
+ */
+@theme {
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-coral: #f2817d;
+  --color-coral-soft: #fde4e2;
+  --color-espresso: #3f322b;
+  --color-cream: #fbf7f3;
+
+  --color-neutral-50: #faf8f6;
+  --color-neutral-100: #f3f0ec;
+  --color-neutral-200: #e7e2dc;
+  --color-neutral-300: #d4cdc5;
+  --color-neutral-400: #a69c92;
+  --color-neutral-500: #7d7268;
+  --color-neutral-600: #5f554d;
+  --color-neutral-700: #4a3f37;
+  --color-neutral-800: #332a24;
+  --color-neutral-900: #3f322b;
+  --color-neutral-950: #1f1915;
+
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #3f322b;
 }
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #171310;
+    --foreground: #f3eee9;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
 }
+
+/* Soft brand circles behind the page, like the site's hero. */
+.tpo-bg {
+  background-image:
+    radial-gradient(circle at 85% -10%, #f3f0ec 0, #f3f0ec 22rem, transparent 22.05rem),
+    radial-gradient(circle at -8% 110%, #fde4e2 0, #fde4e2 16rem, transparent 16.05rem);
+  background-repeat: no-repeat;
+}
+@media (prefers-color-scheme: dark) {
+  .tpo-bg {
+    background-image:
+      radial-gradient(circle at 85% -10%, #231d19 0, #231d19 22rem, transparent 22.05rem),
+      radial-gradient(circle at -8% 110%, #3a2320 0, #3a2320 16rem, transparent 16.05rem);
+  }
+}
+
+/* Cards get a hairline + a whisper of shadow and lift on hover. */
+.rounded-xl.border, .rounded-2xl.border {
+  box-shadow: 0 1px 2px rgb(63 50 43 / 0.04);
+  transition: box-shadow 150ms ease, transform 150ms ease;
+}
+.rounded-xl.border:hover, .rounded-2xl.border:hover {
+  box-shadow: 0 6px 20px rgb(63 50 43 / 0.08);
+}
+
+::selection { background: #fde4e2; color: #3f322b; }

@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { Filter } from "@/lib/segments/fields";
 import type { WinbackStats } from "@/lib/winback";
 import { BeehiivPush } from "./beehiiv-push";
+import { Info } from "./info";
 
 const btn = "rounded-md bg-neutral-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-neutral-700 disabled:opacity-50 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200";
 const ghost = "rounded-md border border-neutral-300 px-2.5 py-1 text-xs font-medium hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-800";
@@ -35,10 +36,10 @@ export function WinBack({ count, filter, name }: { count: number; filter: Filter
   const copy = () => { navigator.clipboard?.writeText(draft?.draft ?? ""); setNotice("Copied."); };
 
   return (
-    <section className="rounded-xl border border-orange-200 bg-orange-50/40 p-5 dark:border-orange-900/60 dark:bg-orange-950/20">
+    <section className="rounded-xl border border-coral/40 bg-coral-soft/40 p-5 dark:border-coral/40 dark:bg-coral/10">
       <div className="flex flex-wrap items-center gap-3">
         <div>
-          <h2 className="text-sm font-medium text-neutral-500">Reach out before they&apos;re gone</h2>
+          <h2 className="flex items-center gap-1.5 text-sm font-medium text-neutral-500">Reach out before they&apos;re gone <Info text="At-risk readers are cooling but not gone. Save them as a segment in one click, let the AI draft a win-back email from aggregate stats only (it never sees who they are), then copy it or push the list to beehiiv (mock)." /></h2>
           <div className="mt-1 text-sm"><b className="text-2xl font-semibold tabular-nums">{count.toLocaleString()}</b> readers are <b>At risk</b> (score 15 to 39).</div>
         </div>
         <div className="ml-auto flex flex-wrap items-center gap-2">

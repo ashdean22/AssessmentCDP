@@ -5,6 +5,7 @@ import type { Filter } from "@/lib/segments/fields";
 import { FirstPagesBar, OpensLine, SourceBar } from "./charts";
 import { EventFeed } from "./event-feed";
 import { WinBack } from "./winback";
+import { Info } from "./info";
 
 export const dynamic = "force-dynamic";
 
@@ -43,7 +44,7 @@ export default async function Home() {
   return (
     <div className="space-y-6">
       <div className="flex items-baseline justify-between">
-        <h1 className="text-2xl font-semibold">Dashboard</h1>
+        <div className="flex items-center gap-2"><h1 className="text-2xl font-semibold">Dashboard</h1><Info text="The whole readership at a glance. Every number comes live from the database; nothing is cached." /></div>
         <span className="text-xs text-neutral-500">“today” = 2026-09-28 (assessment reference date)</span>
       </div>
 
@@ -59,7 +60,7 @@ export default async function Home() {
 
       <section className="rounded-xl border border-neutral-200 p-5 dark:border-neutral-800">
         <div className="flex items-baseline justify-between">
-          <h2 className="text-sm font-medium text-neutral-500">Churn risk</h2>
+          <h2 className="flex items-center gap-1.5 text-sm font-medium text-neutral-500">Churn risk <Info text="Each reader gets a 0–100 engagement score from newsletter recency, web visits and app events in the last 30 days, then a tier. It is recomputed on every webhook event." /></h2>
           <span className="text-xs text-neutral-400">engagement score: recency ≤40 + web ≤30 + app ≤30 · Active 70+, Cooling 40–69, At risk 15–39, Cold &lt;15</span>
         </div>
         <div className="mt-3 flex h-3 w-full overflow-hidden rounded-full bg-neutral-100 dark:bg-neutral-800">
@@ -79,22 +80,22 @@ export default async function Home() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <section className="rounded-xl border border-neutral-200 p-5 dark:border-neutral-800">
-          <h2 className="text-sm font-medium text-neutral-500">Signups by source</h2>
+          <h2 className="flex items-center gap-1.5 text-sm font-medium text-neutral-500">Signups by source <Info text="Where readers came from, after the import normalised spellings (IG, insta, Instagram → instagram)." /></h2>
           <p className="mb-2 text-xs text-neutral-400">All-time, after source normalisation (IG / insta / Instagram → instagram)</p>
           <SourceBar data={stats.by_source} />
         </section>
         <section className="rounded-xl border border-neutral-200 p-5 dark:border-neutral-800">
-          <h2 className="text-sm font-medium text-neutral-500">Open activity, last 12 weeks</h2>
+          <h2 className="flex items-center gap-1.5 text-sm font-medium text-neutral-500">Open activity, last 12 weeks <Info text="How many readers had their most recent open in each week. The data holds one last-open date per reader, so this is recency, not total opens." /></h2>
           <p className="mb-2 text-xs text-neutral-400">Readers whose <i>last</i> open falls in each week. The data only holds one last-open date per reader, so this is not total opens.</p>
           <OpensLine data={opens} />
         </section>
         <section className="rounded-xl border border-neutral-200 p-5 dark:border-neutral-800">
-          <h2 className="text-sm font-medium text-neutral-500">Signups, last 12 weeks</h2>
+          <h2 className="flex items-center gap-1.5 text-sm font-medium text-neutral-500">Signups, last 12 weeks <Info text="New subscribers per week, ending at the reference date." /></h2>
           <p className="mb-2 text-xs text-neutral-400">{signupTotal.toLocaleString()} signups by week</p>
           <OpensLine data={signups} />
         </section>
         <section className="rounded-xl border border-neutral-200 p-5 dark:border-neutral-800">
-          <h2 className="text-sm font-medium text-neutral-500">First pages new subscribers visit</h2>
+          <h2 className="flex items-center gap-1.5 text-sm font-medium text-neutral-500">First pages new subscribers visit <Info text="For readers who signed up in the last 30 days: the first page they visited on or after signup day. Tells you what a fresh reader actually wants." /></h2>
           <p className="mb-2 text-xs text-neutral-400">
             Earliest visit on or after signup · {first.with_a_first_page} of {first.new_subscribers} subscribers who signed up in the last 30 days had a tracked visit
           </p>

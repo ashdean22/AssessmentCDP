@@ -16,16 +16,16 @@ export function LoginForm({ next }: { next: string }) {
           required
           autoFocus
           autoComplete="current-password"
-          className="w-full rounded-md border border-neutral-300 bg-transparent px-3 py-2 outline-none focus:border-neutral-900 dark:border-neutral-700 dark:focus:border-neutral-200"
+          className="w-full rounded-full border border-neutral-300 bg-transparent px-4 py-2.5 outline-none focus:border-coral dark:border-neutral-700 dark:focus:border-neutral-200"
         />
       </label>
       {state?.error && <p className="text-sm text-red-600">{state.error}</p>}
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-md bg-neutral-900 px-3 py-2 text-sm font-medium text-white hover:bg-neutral-700 disabled:opacity-50 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200"
+        className="w-full rounded-full bg-coral px-3 py-2.5 text-sm font-medium text-white hover:bg-espresso disabled:opacity-50"
       >
-        {pending ? "Signing in…" : "Sign in"}
+        {pending ? "Pouring…" : "Pour me in"}
       </button>
     </form>
   );

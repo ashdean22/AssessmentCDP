@@ -172,6 +172,10 @@ Shared definitions (also in the system prompt, and the assistant states which it
 
 ## Extras
 
+- **Subscribers list** (`/subscribers`): every deduped reader, filter by tier/status/source/email prefix, sort, paginate, click through to the profile.
+- **Lookup autocomplete:** prefix suggestions as you type (min 2 characters, max 8 results) from `/api/subscribers/suggest`, behind the login and never near the model.
+- **ⓘ hints** on every section explaining what it does.
+- **The Pour Over's voice everywhere:** one tone guide (`lib/tone.ts`) feeds the chat prompt, the voice assistant and the win-back drafts. The UI uses the site's Poppins type, coral accent and espresso text.
 - **Dashboard:** readers, % active, % cold, app users, events today; churn-tier bar; signups by source; readers by last-open week (labelled honestly: the data holds one last-open date per reader, not every open); signups by week; first pages for new subscribers; a live feed of the newest webhook arrivals.
 - **Engagement score and churn risk** (`lib/score.ts`): recency up to 40 (opened ≤7d 40, ≤30d 25, ≤60d 10) + 5 per web visit in 30 days (max 30) + 3 per app event in 30 days (max 30). Tiers: Active 70+, Cooling 40–69, At risk 15–39, Cold <15. Plain rules, recomputed on every event.
 - **Reach out before they're gone:** one click saves the At-risk segment; the AI drafts a win-back email from **aggregates only** (`lib/winback.ts`; the exact stats are shown next to the draft); copy it or push the segment.
@@ -195,7 +199,7 @@ Shared definitions (also in the system prompt, and the assistant states which it
 
 ## Tests
 
-`npm test` runs 69 Vitest tests in `tests/`: email normalization; dedupe (dates, status, source precedence); web/app linking and visitor stitching; the filter compiler (nested AND/OR, unknown fields rejected, parameterization); CSV escaping; session auth; webhook signature (bad/missing/replayed/tampered), payload schema, and an ingest integration test (duplicate, out-of-order, anonymous-then-login, unknown user); the PII guard; a live test that every AI tool's output is email-free; the Vapi route (secret, unknown tools, guard); beehiiv payloads; win-back stats. Integration tests skip automatically when no database env is present. CI (`.github/workflows/ci.yml`) runs lint, typecheck and tests on every push.
+`npm test` runs 72 Vitest tests in `tests/`: email normalization; dedupe (dates, status, source precedence); web/app linking and visitor stitching; the filter compiler (nested AND/OR, unknown fields rejected, parameterization); CSV escaping; session auth; webhook signature (bad/missing/replayed/tampered), payload schema, and an ingest integration test (duplicate, out-of-order, anonymous-then-login, unknown user); the PII guard; a live test that every AI tool's output is email-free; the Vapi route (secret, unknown tools, guard); beehiiv payloads; win-back stats; email-prefix search escaping and the shared tone guide. Integration tests skip automatically when no database env is present. CI (`.github/workflows/ci.yml`) runs lint, typecheck and tests on every push.
 
 ---
 
@@ -206,7 +210,7 @@ Everything stubbed, mocked or hardcoded, in one place:
 - **beehiiv push is a mock.** `lib/beehiiv.ts` builds the requests; `app/api/beehiiv/push/route.ts` logs and returns them; nothing is sent. The placeholder publication id `pub_00000000-…` is used when `BEEHIIV_PUBLICATION_ID` is unset.
 - **Reference date is hardcoded** to 2026-09-28 by design (`lib/config.ts`, repeated as a literal in `lib/ai/prompt.ts`, `lib/winback.ts`, `scripts/vapi-assistant.ts` and the dashboard caption). "Events today" means events dated that day.
 - **One shared password, no accounts, no rate limiting** on login, the webhook or the Vapi endpoint. `/api/health` is public and returns the subscriber count.
-- **Vapi secret is a static shared header**, and the voice model is set in `scripts/vapi-assistant.ts` (`claude-sonnet-4-5-20250929`, the newest Anthropic model Vapi offers). Voice filters use a flat schema (one AND/OR group, no nesting) because Vapi rejects recursive JSON schemas; the server still validates with the full schema.
+- **Vapi secret is a static shared header**, and the voice model is set in `scripts/vapi-assistant.ts` (`claude-sonnet-4-5-20250929`, the newest Anthropic model Vapi offers). The voice is ElevenLabs "sarah" through Vapi's built-in credits, with Vapi's "Leah" as the scripted fallback. Voice filters use a flat schema (one AND/OR group, no nesting) because Vapi rejects recursive JSON schemas; the server still validates with the full schema.
 - **Chat model** defaults to `claude-sonnet-5-5` (`CHAT_MODEL` env); up to 6 tool steps per answer; chat history is capped at 60 messages.
 - **`ai_results` rows never expire**; CSV export and AI segments cap at 5,000 rows; result tables render the first 200; `distinct_pages` autocompletes the top 200 pages.
 - **Live event feed sorts by arrival time** (so a just-sent event is always on top); every other view sorts by event time.

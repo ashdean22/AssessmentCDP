@@ -1,6 +1,8 @@
 import { lookupByEmail } from "@/lib/profile";
 import { TIER_LABEL } from "@/lib/score";
 import { daysAgo } from "@/lib/config";
+import { SearchBox } from "./search-box";
+import { Info } from "../info";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Lookup · TPO CDP" };
@@ -29,24 +31,12 @@ export default async function LookupPage({
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold">Find anyone</h1>
+      <div className="flex items-center gap-2"><h1 className="text-2xl font-semibold">Find anyone</h1><Info text="Type the start of an email and pick a reader. You get their newsletter card, engagement score, one merged timeline of web visits and app events (sorted by event time), and every id linked to them." /></div>
       <p className="mt-1 text-sm text-neutral-500">
         Search by email. Case and spaces don&apos;t matter — the same normalizer as the import is applied.
       </p>
 
-      <form className="mt-6 flex gap-2" action="/lookup" method="get">
-        <input
-          name="email"
-          type="text"
-          defaultValue={email}
-          placeholder="name@example.com"
-          autoFocus
-          className="w-full max-w-md rounded-md border border-neutral-300 bg-transparent px-3 py-2 text-sm outline-none focus:border-neutral-900 dark:border-neutral-700 dark:focus:border-neutral-200"
-        />
-        <button className="rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-700 dark:bg-white dark:text-neutral-900">
-          Search
-        </button>
-      </form>
+      <SearchBox initial={email} />
 
       {result?.status === "invalid" && (
         <p className="mt-6 text-sm text-red-600">That doesn&apos;t look like an email address.</p>

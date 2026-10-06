@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { SegmentBuilder } from "./builder";
 import type { Filter } from "@/lib/segments/fields";
+import { Info } from "../info";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Segments · TPO CDP" };
@@ -32,7 +33,7 @@ export default async function SegmentsPage({
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold">Build a segment</h1>
+      <div className="flex items-center gap-2"><h1 className="text-2xl font-semibold">Build a segment</h1><Info text="Stack rules (field, comparison, value) in AND/OR groups. The count updates as you type. Save it, export a CSV, or push it to beehiiv (mock). The AI assistant uses this exact same filter engine." /></div>
       <p className="mt-1 text-sm text-neutral-500">
         Rules are field + comparison + value. Group them with AND / OR; groups can nest. Counts come straight from the database.
       </p>

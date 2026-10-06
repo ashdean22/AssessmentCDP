@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Info } from "./info";
 
 type Ev = { event_id: string; event: string; user_id: string | null; device_id: string; ts: string; properties: Record<string, unknown>; resolved_user_id: string | null; received_at: string };
 
@@ -42,7 +43,7 @@ export function EventFeed({ intervalMs = 4000 }: { intervalMs?: number }) {
   return (
     <section className="rounded-xl border border-neutral-200 p-5 dark:border-neutral-800">
       <div className="flex items-baseline justify-between">
-        <h2 className="text-sm font-medium text-neutral-500">Live event feed</h2>
+        <h2 className="flex items-center gap-1.5 text-sm font-medium text-neutral-500">Live event feed <Info text="The newest events from the mobile app webhook, newest arrival first. Send one with npm run send-event and watch it land here within a few seconds." /></h2>
         <div className="text-xs text-neutral-400">
           <span className="mr-1 inline-block h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
           newest arrivals · refreshes every {Math.round(intervalMs / 1000)}s{updated && ` · ${updated}`}

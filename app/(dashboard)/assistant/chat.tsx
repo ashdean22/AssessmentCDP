@@ -99,7 +99,7 @@ export function Chat() {
             title={voice.state === "unavailable" ? "Voice not configured" : voice.state === "live" ? "End voice call" : "Talk to the assistant"}
             className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-md border text-base ${
               voice.state === "live"
-                ? "border-red-500 bg-red-500 text-white"
+                ? "border-coral bg-coral text-white"
                 : voice.state === "connecting"
                   ? "border-neutral-400 text-neutral-400"
                   : "border-neutral-300 hover:bg-neutral-100 disabled:opacity-40 dark:border-neutral-700 dark:hover:bg-neutral-800"

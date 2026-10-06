@@ -64,3 +64,12 @@ Running log of what's done against PLAN.md. Updated each phase.
 - "Reach out before they're gone": one-click save of the At-risk segment; `POST /api/winback` drafts an email with `claude-sonnet-5-5` from `lib/winback.ts` aggregates only (guarded by `assertNoPii`, shown in a "What the AI saw" panel); Copy button
 - beehiiv push = **mock**: `lib/beehiiv.ts` builds the real per-subscriber `POST /v2/publications/{id}/subscriptions` bodies; `POST /api/beehiiv/push` logs a summary and returns the plan; UI shows a "Mock mode" panel in the segment builder, AI result tables and the win-back card. Nothing is sent.
 - Tests: 69 passing (+3 beehiiv, +3 win-back stats)
+
+## Oct 6 (post-review) — Polish before the self-audit ✅
+- `/subscribers` list: filters (tier, status, source, email prefix), sort, pagination, click-through to profile
+- Lookup autocomplete (`/api/subscribers/suggest`, prefix-only, min 2 chars, max 8; behind login, never near the model)
+- `Info` hover hints on every section
+- `lib/tone.ts` — The Pour Over's voice, shared by chat prompt, Vapi prompt and win-back drafts; voice switched to ElevenLabs "sarah" with smart endpointing + denoising for a more natural call
+- Theme: Poppins, coral `#F2817D`, espresso `#3F322B`, warm neutral scale, pill nav/buttons, soft hero circles, coral charts
+- Tests: 72 passing (+search, +tone)
+
