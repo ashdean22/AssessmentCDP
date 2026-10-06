@@ -18,4 +18,13 @@ Running log of what's done against PLAN.md. Updated each phase.
 - Production DB loaded: 2,900 subscribers, 10,000 web events (8,441 linked), 930 app users (900 linked), 10 issues
 - Tests: 22 passing (`tests/normalize`, `tests/merge`, `tests/mask`)
 
-## Thu Oct 8 — Login and lookup ⏳
+## Thu Oct 8 — Login and lookup ✅ (done Oct 6)
+- `lib/auth.ts` signed stateless session (HMAC, 7-day), constant-time password check
+- `proxy.ts` locks everything except `/login`, `/webhooks/app`, `/api/vapi/tools`, `/api/health`; API paths get 401, pages redirect
+- `app/login` server action + form; sign-out in nav
+- `lib/score.ts` + `lib/metrics.ts` engagement score, churn tier, shared definitions
+- `lib/profile.ts` + `app/(dashboard)/lookup` — normalized email search, newsletter card, merged timeline (event time), linked IDs
+- Placeholder dashboard with live counts
+- Tests: 30 passing (+auth, +score)
+
+## Fri Oct 9 – Sat Oct 10 — Filter builder ⏳
