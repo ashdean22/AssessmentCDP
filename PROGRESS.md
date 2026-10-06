@@ -27,4 +27,13 @@ Running log of what's done against PLAN.md. Updated each phase.
 - Placeholder dashboard with live counts
 - Tests: 30 passing (+auth, +score)
 
-## Fri Oct 9 – Sat Oct 10 — Filter builder ⏳
+## Fri Oct 9 – Sat Oct 10 — Filter builder ✅ (done Oct 6)
+- `lib/segments/fields.ts` zod allowlist of 12 fields × comparisons; nested AND/OR groups
+- `lib/segments/compile.ts` → parameterized WHERE (values only ever in `$1` jsonb); human "what ran" description
+- DB: `segment_count` / `segment_rows` RPCs (service role only), `reference_date()`, `subscriber_activity` view, `distinct_pages`
+- `lib/score-db.ts` recomputes score/tier from the one formula in `lib/score.ts`; import now fills them (2,900 scored)
+- APIs: `/api/segments` (list/save/delete), `/count`, `/preview`, `/api/export` (CSV with formula-injection escaping)
+- UI `/segments`: nested rule builder, live count, table, save, export; beehiiv button stubbed until Oct 16
+- Tests: 38 passing (+compile, +csv). Sanity: Instagram & cold 30d = 229; went cold last month = 69
+
+## Sun Oct 11 – Mon Oct 12 — Webhook ⏳

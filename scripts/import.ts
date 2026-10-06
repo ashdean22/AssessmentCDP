@@ -14,6 +14,7 @@ import { parse } from "csv-parse/sync";
 import { db } from "@/lib/db";
 import { emailHash } from "@/lib/pii/mask";
 import { toDateString } from "@/lib/normalize";
+import { recomputeScores } from "@/lib/score-db";
 import {
   cleanAppUsers,
   cleanSubscribers,
@@ -146,6 +147,9 @@ async function main() {
     if (error) throw new Error(`import_issues insert: ${error.message}`);
   }
   report["import issues logged"] = issues.length;
+
+  // ---------------------------------------------------------------- scores
+  report["engagement scores computed"] = await recomputeScores();
 
   // ---------------------------------------------------------------- report
   console.log(`\nImport report (${((Date.now() - t0) / 1000).toFixed(1)}s)\n`);
