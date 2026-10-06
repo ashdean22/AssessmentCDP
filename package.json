@@ -10,7 +10,8 @@
     "test": "vitest run",
     "profile": "tsx scripts/profile-data.ts",
     "import": "tsx --tsconfig tsconfig.json scripts/import.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "send-event": "tsx --tsconfig tsconfig.json scripts/send-event.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.2",

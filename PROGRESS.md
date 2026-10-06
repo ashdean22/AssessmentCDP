@@ -36,4 +36,10 @@ Running log of what's done against PLAN.md. Updated each phase.
 - UI `/segments`: nested rule builder, live count, table, save, export; beehiiv button stubbed until Oct 16
 - Tests: 38 passing (+compile, +csv). Sanity: Instagram & cold 30d = 229; went cold last month = 69
 
-## Sun Oct 11 – Mon Oct 12 — Webhook ⏳
+## Sun Oct 11 – Mon Oct 12 — Webhook ✅ (done Oct 6)
+- `POST /webhooks/app` — HMAC-SHA256 over `timestamp.body` (`X-TPO-Timestamp`, `X-TPO-Signature`), constant-time compare, 5-min window, 64 KB cap
+- `lib/webhook/schema.ts` strict zod payload (event enum, slug regex, id charset); `lib/webhook/ingest.ts` idempotent on event_id, stubs unknown users, links device→user, attaches earlier anonymous events on login, resolves later anonymous events via device, recomputes the subscriber's score
+- `scripts/send-event.ts` (`npm run send-event -- all --url …`): normal, duplicate, out-of-order, anon-then-login, unknown-user, bad-signature, bad-body — all behave as specified
+- Tests: 46 passing (+5 verify/schema unit, +3 DB integration gated on env)
+
+## Tue Oct 13 – Wed Oct 14 — AI chat ⏳
