@@ -333,8 +333,8 @@ Churn tiers: Active (70+), Cooling (40 to 69), At risk (15 to 39), Cold (under 1
 
 ## 9. Day-by-day schedule
 
-- [ ] **Mon Oct 5 — Setup.** Repo, Next.js, Supabase, Vercel "hello world" live. Files into `data/` and `docs/`. Profile CSVs → DATA_NOTES.md.
-- [ ] **Tue Oct 6 to Wed Oct 7 — Import.** Cleaning, dedupe, linking, import report, tests.
+- [x] **Mon Oct 5 — Setup.** Repo, Next.js, Supabase, Vercel "hello world" live. Files into `data/` and `docs/`. Profile CSVs → DATA_NOTES.md.
+- [x] **Tue Oct 6 to Wed Oct 7 — Import.** Cleaning, dedupe, linking, import report, tests.
 - [ ] **Thu Oct 8 — Login and lookup.**
 - [ ] **Fri Oct 9 to Sat Oct 10 — Filter builder,** segment table, CSV export.
 - [ ] **Sun Oct 11 to Mon Oct 12 — Webhook,** stitching, send-event script, tests.

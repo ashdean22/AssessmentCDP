@@ -9,7 +9,7 @@ Measured with `npm run profile` (raw output below). Reference date: **2026-09-28
 | 85 subscriber emails appear 2× differing only by **case or surrounding spaces**; dup rows are otherwise identical | subscribers | `normalizeEmail()` = trim + lowercase; dedupe on the result |
 | 212 web-event emails and 94 app-user emails have **uppercase** letters | web_events, app_users | Same `normalizeEmail()` before linking |
 | 8 fully **blank rows** (`,,,,`) | subscribers | Reject → `import_issues` |
-| 1 email `not-an-email` (no `@`) | subscribers | Reject → `import_issues` |
+| 2 invalid emails: `not-an-email` (no `@`) and `@gmail.com` (no local part) | subscribers | Reject → `import_issues` |
 | 494 subscribers have **empty `last_open_date`** | subscribers | Store `null` = "never opened" (not an error) |
 | **All dates are clean ISO** (`YYYY-MM-DD`; web timestamps `YYYY-MM-DD HH:MM:SS`, no timezone) | all | Parse as UTC; still route unparseable → null + issue |
 | Source casing differs across files: `Instagram` vs `instagram`, and `X` vs `twitter` | subscribers vs web utm | Lowercase, then lookup table: `x`/`twitter` → `twitter`; unknown → `other` |
@@ -19,7 +19,7 @@ Measured with `npm run profile` (raw output below). Reference date: **2026-09-28
 | 930 app users, all unique; **30 have no matching subscriber** | app_users | Keep as app-only profiles (`subscriber_id = null`) |
 | No plus-aliases, no duplicate user_ids | — | Edge cases to document, not handle |
 
-Expected import result: **2,995 → 2,901 subscribers** (85 merged, 9 rejected), 10,000 web events (8,441 linked), 930 app users (900 linked).
+Actual import result (`npm run import`, verified idempotent on a second run): **2,995 → 2,900 subscribers** (85 merged, 10 rejected), 10,000 web events (8,441 linked, 1,400 visitors stitched), 930 app users (900 linked), 10 import issues logged.
 
 ---
 

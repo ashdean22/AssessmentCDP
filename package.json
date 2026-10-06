@@ -9,7 +9,7 @@
     "lint": "eslint",
     "test": "vitest run",
     "profile": "tsx scripts/profile-data.ts",
-    "import": "tsx scripts/import.ts",
+    "import": "tsx --tsconfig tsconfig.json scripts/import.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
