@@ -14,7 +14,7 @@ export function SourceBar({ data }: { data: { source: string; count: number }[] 
           <XAxis dataKey="source" tick={{ fontSize: 10 }} />
           <YAxis tick={{ fontSize: 10 }} allowDecimals={false} />
           {tip}
-          <Bar dataKey="count" name="signups" fill="#f2817d" radius={[3, 3, 0, 0]} />
+          <Bar isAnimationActive={false} dataKey="count" name="signups" fill="#f2817d" radius={[3, 3, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>
@@ -30,7 +30,7 @@ export function OpensLine({ data }: { data: { period: string; count: number }[] 
           <XAxis dataKey="period" tick={{ fontSize: 10 }} tickFormatter={(v: string) => v.slice(5)} />
           <YAxis tick={{ fontSize: 10 }} allowDecimals={false} />
           {tip}
-          <Line type="monotone" dataKey="count" name="readers" stroke="#3f322b" strokeWidth={2} dot={{ r: 2 }} />
+          <Line isAnimationActive={false} type="monotone" dataKey="count" name="readers" stroke="#3f322b" strokeWidth={2} dot={{ r: 2 }} />
         </LineChart>
       </ResponsiveContainer>
     </div>
@@ -46,7 +46,7 @@ export function FirstPagesBar({ data }: { data: { page: string; count: number }[
           <XAxis type="number" tick={{ fontSize: 10 }} allowDecimals={false} />
           <YAxis type="category" dataKey="page" width={120} tick={{ fontSize: 10, fontFamily: "ui-monospace, monospace" }} />
           {tip}
-          <Bar dataKey="count" name="new subscribers" fill="#f2817d" radius={[0, 3, 3, 0]} />
+          <Bar isAnimationActive={false} dataKey="count" name="new subscribers" fill="#f2817d" radius={[0, 3, 3, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

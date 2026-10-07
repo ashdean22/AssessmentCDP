@@ -67,13 +67,19 @@ body {
   }
 }
 
-/* Cards get a hairline + a whisper of shadow and lift on hover. */
+/* Cards get a hairline + a whisper of shadow (no hover transitions: cheaper paints). */
 .rounded-xl.border, .rounded-2xl.border {
   box-shadow: 0 1px 2px rgb(63 50 43 / 0.04);
-  transition: box-shadow 150ms ease, transform 150ms ease;
 }
-.rounded-xl.border:hover, .rounded-2xl.border:hover {
-  box-shadow: 0 6px 20px rgb(63 50 43 / 0.08);
+
+/* Native selects: hide the OS arrow, draw a chevron right next to the text. */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 1.75rem !important;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237d7268' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
 }
 
 ::selection { background: #fde4e2; color: #3f322b; }

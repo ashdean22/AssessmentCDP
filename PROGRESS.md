@@ -72,4 +72,5 @@ Running log of what's done against PLAN.md. Updated each phase.
 - `lib/tone.ts` — The Pour Over's voice, shared by chat prompt, Vapi prompt and win-back drafts; voice switched to ElevenLabs "sarah" with smart endpointing + denoising for a more natural call
 - Theme: Poppins, coral `#F2817D`, espresso `#3F322B`, warm neutral scale, pill nav/buttons, soft hero circles, coral charts
 - Tests: 72 passing (+search, +tone)
+- Speed: Vercel functions pinned to `pdx1` next to the `us-west-2` database (was iad1: ~500 ms per query); `loading.tsx` skeleton; chart animations and header blur removed; `/subscribers` filters live via `/api/subscribers` (debounced, URL synced); native selects auto-size to the selected option with a chevron beside the text
 

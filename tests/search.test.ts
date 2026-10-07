@@ -23,3 +23,12 @@ describe("tone guide is shared by every AI surface", () => {
     expect(WINBACK_SYSTEM).toContain(TONE_GUIDE);
   });
 });
+
+describe("subscriber list params", () => {
+  it("accepts only allowlisted values and sane pages", async () => {
+    const { parseListParams } = await import("@/lib/subscribers-list");
+    expect(parseListParams({ tier: "at_risk", status: "nope", source: "instagram", sort: "score", page: "3", q: "Emi" }))
+      .toEqual({ page: 3, sort: "score", tier: "at_risk", status: "", source: "instagram", q: "Emi" });
+    expect(parseListParams(new URLSearchParams("page=-4&sort=drop%20table"))).toMatchObject({ page: 1, sort: "last_open" });
+  });
+});

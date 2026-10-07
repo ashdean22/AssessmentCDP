@@ -21,7 +21,7 @@ export function TrendChart({ series, metric }: { series: { period: string; count
             <XAxis dataKey="period" tick={{ fontSize: 10 }} tickFormatter={(v: string) => v.slice(5)} />
             <YAxis tick={{ fontSize: 10 }} allowDecimals={false} />
             <Tooltip contentStyle={{ fontSize: 11 }} />
-            <Bar dataKey="count" fill="#f2817d" radius={[3, 3, 0, 0]} />
+            <Bar isAnimationActive={false} dataKey="count" fill="#f2817d" radius={[3, 3, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>

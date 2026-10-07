@@ -6,7 +6,7 @@ import { Nav } from "./nav";
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-neutral-200/70 bg-white/80 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/80">
+      <header className="sticky top-0 z-40 border-b border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950">
         <div className="mx-auto flex max-w-6xl items-center gap-5 px-4 py-2.5">
           <Link href="/" className="flex items-center gap-2.5 font-semibold tracking-tight">
             <Logo />

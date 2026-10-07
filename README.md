@@ -172,7 +172,7 @@ Shared definitions (also in the system prompt, and the assistant states which it
 
 ## Extras
 
-- **Subscribers list** (`/subscribers`): every deduped reader, filter by tier/status/source/email prefix, sort, paginate, click through to the profile.
+- **Subscribers list** (`/subscribers`): every deduped reader; filters apply as you type (tier, status, source, email prefix), sort, paginate, click through to the profile. The URL stays shareable.
 - **Lookup autocomplete:** prefix suggestions as you type (min 2 characters, max 8 results) from `/api/subscribers/suggest`, behind the login and never near the model.
 - **ⓘ hints** on every section explaining what it does.
 - **The Pour Over's voice everywhere:** one tone guide (`lib/tone.ts`) feeds the chat prompt, the voice assistant and the win-back drafts. The UI uses the site's Poppins type, coral accent and espresso text.
@@ -199,7 +199,7 @@ Shared definitions (also in the system prompt, and the assistant states which it
 
 ## Tests
 
-`npm test` runs 72 Vitest tests in `tests/`: email normalization; dedupe (dates, status, source precedence); web/app linking and visitor stitching; the filter compiler (nested AND/OR, unknown fields rejected, parameterization); CSV escaping; session auth; webhook signature (bad/missing/replayed/tampered), payload schema, and an ingest integration test (duplicate, out-of-order, anonymous-then-login, unknown user); the PII guard; a live test that every AI tool's output is email-free; the Vapi route (secret, unknown tools, guard); beehiiv payloads; win-back stats; email-prefix search escaping and the shared tone guide. Integration tests skip automatically when no database env is present. CI (`.github/workflows/ci.yml`) runs lint, typecheck and tests on every push.
+`npm test` runs 73 Vitest tests in `tests/`: email normalization; dedupe (dates, status, source precedence); web/app linking and visitor stitching; the filter compiler (nested AND/OR, unknown fields rejected, parameterization); CSV escaping; session auth; webhook signature (bad/missing/replayed/tampered), payload schema, and an ingest integration test (duplicate, out-of-order, anonymous-then-login, unknown user); the PII guard; a live test that every AI tool's output is email-free; the Vapi route (secret, unknown tools, guard); beehiiv payloads; win-back stats; email-prefix search escaping and the shared tone guide. Integration tests skip automatically when no database env is present. CI (`.github/workflows/ci.yml`) runs lint, typecheck and tests on every push.
 
 ---
 
@@ -217,4 +217,5 @@ Everything stubbed, mocked or hardcoded, in one place:
 - **Scores recompute** for the affected subscriber on each webhook event and for everyone on import; nothing recomputes on the passage of (fixed) time.
 - **Dedupe edge cases** listed above: plus-aliases, shared devices, one visitor id for two people, changed emails.
 - **Keep-alive** depends on the `APP_URL` GitHub repository variable and GitHub's cron, which can be delayed.
+- **Hosting:** Vercel functions are pinned to `pdx1` (`vercel.json`) because the Supabase project lives in `us-west-2`; a cross-country hop was adding ~400 ms to every query.
 - The import runs from a laptop against the production database (no scheduled re-import); `supabase/migrations/` are applied by hand (no migration runner wired into deploy).
