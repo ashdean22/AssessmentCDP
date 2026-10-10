@@ -7,6 +7,7 @@ import { SOURCES, STATUSES } from "@/lib/normalize";
 import { APP_EVENT_TYPES } from "@/lib/config";
 import { CHURN_TIERS, TIER_LABEL } from "@/lib/score";
 import { BeehiivPush } from "../beehiiv-push";
+import { explainFilter, namedSegment } from "@/lib/segments/explain";
 
 type Node = Rule | Group;
 const isGroup = (n: Node): n is Group => (n as Group).op !== undefined;
@@ -57,6 +58,7 @@ export function SegmentBuilder({
   const [saved, setSaved] = useState<Saved[]>(savedSegments);
   const [notice, setNotice] = useState<string | null>(null);
   const seq = useRef(0);
+  const [confirming, setConfirming] = useState(false);
 
   // Live count, debounced
   useEffect(() => {
@@ -109,6 +111,8 @@ export function SegmentBuilder({
   };
 
   const json = useMemo(() => JSON.stringify(filter, null, 2), [filter]);
+  const plain = useMemo(() => explainFilter(filter), [filter]);
+  const named = useMemo(() => namedSegment(filter), [filter]);
 
   return (
     <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_320px]">
@@ -121,14 +125,28 @@ export function SegmentBuilder({
             <div className="text-xs text-neutral-500">matching subscribers</div>
           </div>
           <div className="min-w-0 flex-1 text-sm text-neutral-600 dark:text-neutral-400">
-            {error ? <span className="text-red-600">{error}</span> : <><span className="text-neutral-400">ran: </span>{description}</>}
+            {error ? <span className="text-red-600">{error}</span> : <>
+              <div className="font-medium text-neutral-800 dark:text-neutral-100">{plain}</div>
+              {named && <div className="mt-0.5 text-xs text-coral">{named}</div>}
+              <div className="mt-0.5 text-xs text-neutral-400">ran: {description}</div>
+            </>}
           </div>
           <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Segment name" className={`${inputCls} w-44`} />
           <button className={primaryBtn} onClick={preview} disabled={busy || !!error}>Show table</button>
-          <button className={primaryBtn} onClick={save} disabled={busy || !!error}>Save</button>
+          <button className={primaryBtn} onClick={() => setConfirming(true)} disabled={busy || !!error}>Save</button>
           <button className={primaryBtn} onClick={exportCsv} disabled={busy || !!error}>Export CSV</button>
           <BeehiivPush filter={filter} name={name || description.slice(0, 80) || "segment"} className={primaryBtn} />
           {notice && <span className="text-xs text-emerald-600">{notice}</span>}
+          {confirming && (
+            <div className="basis-full rounded-xl border border-coral/40 bg-coral-soft/40 p-3 text-sm dark:bg-coral/10">
+              <div className="font-medium">Save this segment?</div>
+              <div className="mt-1 text-neutral-700 dark:text-neutral-300">“{name.trim() || description.slice(0, 80)}”: {plain} {count !== null && <b>{count.toLocaleString()} readers right now.</b>}</div>
+              <div className="mt-2 flex gap-2">
+                <button className={primaryBtn} onClick={async () => { setConfirming(false); await save(); }}>Yes, save it</button>
+                <button className="rounded-md border border-neutral-300 px-3 py-1.5 text-sm dark:border-neutral-700" onClick={() => setConfirming(false)}>Keep editing</button>
+              </div>
+            </div>
+          )}
         </div>
 
         {rows && (

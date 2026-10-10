@@ -85,8 +85,8 @@ export default async function Home() {
           <SourceBar data={stats.by_source} />
         </section>
         <section className="rounded-xl border border-neutral-200 p-5 dark:border-neutral-800">
-          <h2 className="flex items-center gap-1.5 text-sm font-medium text-neutral-500">Open activity, last 12 weeks <Info text="How many readers had their most recent open in each week. The data holds one last-open date per reader, so this is recency, not total opens." /></h2>
-          <p className="mb-2 text-xs text-neutral-400">Readers whose <i>last</i> open falls in each week. The data only holds one last-open date per reader, so this is not total opens.</p>
+          <h2 className="flex items-center gap-1.5 text-sm font-medium text-neutral-500">When readers last opened, by week <Info text="Each reader is counted once, in the week they last opened the newsletter. A tall bar on the right means many readers opened recently. Readers counted in older weeks haven't opened since. We only have each reader's most recent open, not every open." /></h2>
+          <p className="mb-2 text-xs text-neutral-400">Each reader counted once, in the week of their most recent open. Not total opens.</p>
           <OpensLine data={opens} />
         </section>
         <section className="rounded-xl border border-neutral-200 p-5 dark:border-neutral-800">

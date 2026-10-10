@@ -137,7 +137,7 @@ Behaviour (`lib/webhook/ingest.ts`):
 
 A filter is a tree of rules (`field + comparison + value`) in AND/OR groups that can nest. Twelve fields are allowlisted in `lib/segments/fields.ts` (source, status, signup date, days since open, visited page, UTM source, web visits in N days, has app, app events by type in N days, last app activity, engagement score, churn tier). `lib/segments/compile.ts` turns the JSON into a WHERE clause where **every user value travels as a parameter** (`($1->>'pN')`) and nothing is interpolated. The UI and the AI share this compiler, so "Instagram signups that went cold last month" is the same query (and the same 69 readers) whichever way you ask.
 
-Results: live count, table, save, CSV export (server-built, cells starting with `= + - @` are escaped), and a mock push to beehiiv.
+As you build, a plain-English sentence reads the filter back ("Readers who signed up from instagram and haven't opened the newsletter in over 30 days.") and names well-known groups like At risk; saving asks for confirmation with that sentence and the live count. Results: live count, table, save, CSV export (server-built, cells starting with `= + - @` are escaped), and a mock push to beehiiv.
 
 ---
 
@@ -199,7 +199,7 @@ Shared definitions (also in the system prompt, and the assistant states which it
 
 ## Tests
 
-`npm test` runs 73 Vitest tests in `tests/`: email normalization; dedupe (dates, status, source precedence); web/app linking and visitor stitching; the filter compiler (nested AND/OR, unknown fields rejected, parameterization); CSV escaping; session auth; webhook signature (bad/missing/replayed/tampered), payload schema, and an ingest integration test (duplicate, out-of-order, anonymous-then-login, unknown user); the PII guard; a live test that every AI tool's output is email-free; the Vapi route (secret, unknown tools, guard); beehiiv payloads; win-back stats; email-prefix search escaping and the shared tone guide. Integration tests skip automatically when no database env is present. CI (`.github/workflows/ci.yml`) runs lint, typecheck and tests on every push.
+`npm test` runs 76 Vitest tests in `tests/`: email normalization; dedupe (dates, status, source precedence); web/app linking and visitor stitching; the filter compiler (nested AND/OR, unknown fields rejected, parameterization); CSV escaping; session auth; webhook signature (bad/missing/replayed/tampered), payload schema, and an ingest integration test (duplicate, out-of-order, anonymous-then-login, unknown user); the PII guard; a live test that every AI tool's output is email-free; the Vapi route (secret, unknown tools, guard); beehiiv payloads; win-back stats; email-prefix search escaping and the shared tone guide. Integration tests skip automatically when no database env is present. CI (`.github/workflows/ci.yml`) runs lint, typecheck and tests on every push.
 
 ---
 
