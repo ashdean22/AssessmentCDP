@@ -60,15 +60,15 @@ export default async function Home() {
 
       <section className="rounded-xl border border-neutral-200 p-5 dark:border-neutral-800">
         <div className="flex items-baseline justify-between">
-          <h2 className="flex items-center gap-1.5 text-sm font-medium text-neutral-500">Churn risk <Info text="Each reader gets a 0–100 engagement score from newsletter recency, web visits and app events in the last 30 days, then a tier. It is recomputed on every webhook event." /></h2>
+          <h2 className="flex items-center gap-1.5 text-sm font-medium text-neutral-500">Churn risk <Info text="Each reader gets a 0–100 engagement score from newsletter recency, web visits and app events in the last 30 days, then a tier. It is recomputed on every webhook event. Click a tier to open those readers as a segment." /></h2>
           <span className="text-xs text-neutral-400">engagement score: recency ≤40 + web ≤30 + app ≤30 · Active 70+, Cooling 40–69, At risk 15–39, Cold &lt;15</span>
         </div>
         <div className="mt-3 flex h-3 w-full overflow-hidden rounded-full bg-neutral-100 dark:bg-neutral-800">
-          {tiers.map((t) => <div key={t.tier} className={TIER_CLASS[t.tier]} style={{ width: `${pct(t.n, stats.subscribers)}%` }} title={`${TIER_LABEL[t.tier]} ${t.n}`} />)}
+          {tiers.map((t) => <Link key={t.tier} href={`/segments?tier=${t.tier}`} className={`${TIER_CLASS[t.tier]} hover:opacity-80`} style={{ width: `${pct(t.n, stats.subscribers)}%` }} title={`${TIER_LABEL[t.tier]} ${t.n}: open in the segment builder`} />)}
         </div>
         <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-xs">
           {tiers.map((t) => (
-            <Link key={t.tier} href="/segments" className="flex items-center gap-1.5 hover:underline">
+            <Link key={t.tier} href={`/segments?tier=${t.tier}`} title={`Open ${TIER_LABEL[t.tier]} readers in the segment builder`} className="flex items-center gap-1.5 hover:underline">
               <span className={`inline-block h-2.5 w-2.5 rounded-sm ${TIER_CLASS[t.tier]}`} />
               {TIER_LABEL[t.tier]} <b className="tabular-nums">{t.n.toLocaleString()}</b> <span className="text-neutral-400">({pct(t.n, stats.subscribers)}%)</span>
             </Link>

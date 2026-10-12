@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import { SegmentBuilder } from "./builder";
 import type { Filter } from "@/lib/segments/fields";
 import { Info } from "../info";
+import { CHURN_TIERS, TIER_LABEL, type ChurnTier } from "@/lib/score";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Segments · TPO CDP" };
@@ -17,9 +18,10 @@ const DEFAULT_FILTER: Filter = {
 export default async function SegmentsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ id?: string }>;
+  searchParams: Promise<{ id?: string; tier?: string }>;
 }) {
-  const { id } = await searchParams;
+  const { id, tier } = await searchParams;
+  const tierPreset = CHURN_TIERS.includes(tier as ChurnTier) ? (tier as ChurnTier) : null;
   const supabase = db();
   const [{ data: segments }, { data: pages }, loaded] = await Promise.all([
     supabase.from("segments").select("id,name,filter_json,created_at").order("created_at", { ascending: false }).limit(100),
@@ -29,7 +31,9 @@ export default async function SegmentsPage({
 
   const initial = loaded?.data
     ? { name: loaded.data.name as string, filter: loaded.data.filter_json as Filter }
-    : { name: "", filter: DEFAULT_FILTER };
+    : tierPreset
+      ? { name: `${TIER_LABEL[tierPreset]} readers`, filter: { op: "AND", rules: [{ field: "churn_tier", cmp: "is", value: tierPreset }] } as Filter }
+      : { name: "", filter: DEFAULT_FILTER };
 
   return (
     <div>
@@ -38,6 +42,7 @@ export default async function SegmentsPage({
         Rules are field + comparison + value. Group them with AND / OR; groups can nest. Counts come straight from the database.
       </p>
       <SegmentBuilder
+        key={id ?? tierPreset ?? "new"}
         initialName={initial.name}
         initialFilter={initial.filter}
         savedSegments={(segments ?? []) as { id: number; name: string; filter_json: Filter; created_at: string }[]}
