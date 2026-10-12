@@ -19,6 +19,11 @@ const STARTERS = [
 
 const btn = "rounded-md border border-neutral-300 px-2.5 py-1 text-xs font-medium hover:bg-neutral-100 disabled:opacity-40 dark:border-neutral-700 dark:hover:bg-neutral-800";
 
+// Bubbles set their own text colour so they read on any background. User text
+// is plain (prose would force its own dark body colour onto the dark bubble).
+const USER_BUBBLE = "bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-950";
+const BOT_BUBBLE = "border border-neutral-200 bg-neutral-50 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100";
+
 export function Chat() {
   const [chatId, setChatId] = useState(() => `c_${Date.now()}`);
   const [input, setInput] = useState("");
@@ -48,7 +53,7 @@ export function Chat() {
   const empty = messages.length === 0 && voiceTurns.length === 0;
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col rounded-xl border border-neutral-200 dark:border-neutral-800">
+    <div className="flex min-h-0 flex-1 flex-col rounded-xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950">
       <div className="flex-1 space-y-4 overflow-y-auto p-4">
         {empty && (
           <div className="mx-auto max-w-xl py-10 text-center">
@@ -63,7 +68,7 @@ export function Chat() {
         {messages.map((m) => <Message key={m.id} m={m} />)}
         {voiceTurns.map((t) => (
           <div key={t.id} className={`flex ${t.role === "user" ? "justify-end" : "justify-start"}`}>
-            <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm ${t.role === "user" ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900" : "bg-neutral-100 dark:bg-neutral-900"} ${t.final ? "" : "opacity-60"}`}>
+            <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm ${t.role === "user" ? USER_BUBBLE : BOT_BUBBLE} ${t.final ? "" : "opacity-60"}`}>
               <span className="mr-1.5 text-[10px] uppercase tracking-wide opacity-60">🎙 {t.role === "user" ? "you" : "voice"}</span>{t.text}
             </div>
           </div>
@@ -141,12 +146,16 @@ function Message({ m }: { m: UIMessage }) {
 
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
-      <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm ${isUser ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900" : "bg-neutral-100 dark:bg-neutral-900"}`}>
+      <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm ${isUser ? USER_BUBBLE : BOT_BUBBLE}`}>
         {tools.map((t) => <ToolCard key={t.toolCallId} t={t} />)}
         {text && (
-          <div className="prose prose-sm max-w-none prose-neutral dark:prose-invert prose-p:my-1.5 prose-table:my-2 prose-th:px-2 prose-td:px-2">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{text}</ReactMarkdown>
-          </div>
+          isUser ? (
+            <div className="whitespace-pre-wrap">{text}</div>
+          ) : (
+            <div className="prose prose-sm max-w-none prose-neutral dark:prose-invert prose-p:my-1.5 prose-table:my-2 prose-th:px-2 prose-td:px-2">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{text}</ReactMarkdown>
+            </div>
+          )
         )}
         {!isUser && text && (
           <div className="mt-1 flex justify-end">
