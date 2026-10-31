@@ -1,4 +1,4 @@
-# TPO Mini CDP
+# Pulse CDP
 
 Read `PLAN.md` fully before any task. The assessment brief is `docs/TPO_Developer_Assessment.pdf`; it wins if the two disagree.
 

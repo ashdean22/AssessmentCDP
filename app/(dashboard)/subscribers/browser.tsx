@@ -7,8 +7,8 @@ import { CHURN_TIERS, TIER_LABEL } from "@/lib/score";
 import { PAGE_SIZE, SORTS, type ListParams, type SortKey, type SubscriberRow } from "@/lib/subscribers-list";
 import { AutoSelect } from "../auto-select";
 
-const TIER_DOT: Record<string, string> = { active: "bg-emerald-500", cooling: "bg-amber-400", at_risk: "bg-coral", cold: "bg-neutral-400" };
-const pill = "rounded-full border border-neutral-300 bg-white px-3 py-1.5 text-sm outline-none focus:border-espresso dark:border-neutral-700 dark:bg-neutral-950";
+const TIER_DOT: Record<string, string> = { active: "bg-emerald-500", cooling: "bg-amber-400", at_risk: "bg-accent", cold: "bg-neutral-400" };
+const pill = "rounded-full border border-neutral-300 bg-white px-3 py-1.5 text-sm outline-none focus:border-ink dark:border-neutral-700 dark:bg-neutral-950";
 
 function toQuery(p: ListParams) {
   const u = new URLSearchParams();
@@ -56,7 +56,7 @@ export function SubscriberBrowser({ initial, initialRows, initialTotal }: { init
         <AutoSelect value={p.status} onChange={(e) => set({ status: e.target.value })} className={pill}><option value="">Any status</option>{STATUSES.map((t) => <option key={t} value={t}>{t}</option>)}</AutoSelect>
         <AutoSelect value={p.source} onChange={(e) => set({ source: e.target.value })} className={pill}><option value="">Any source</option>{SOURCES.map((t) => <option key={t} value={t}>{t}</option>)}</AutoSelect>
         <AutoSelect value={p.sort} onChange={(e) => set({ sort: e.target.value as SortKey })} className={pill}>{(Object.keys(SORTS) as SortKey[]).map((k) => <option key={k} value={k}>{SORTS[k].label}</option>)}</AutoSelect>
-        {filtered && <button type="button" onClick={() => set({ tier: "", status: "", source: "", q: "" })} className="text-sm text-neutral-500 hover:text-coral">clear</button>}
+        {filtered && <button type="button" onClick={() => set({ tier: "", status: "", source: "", q: "" })} className="text-sm text-neutral-500 hover:text-accent">clear</button>}
       </div>
 
       <div className={`mt-5 overflow-x-auto rounded-2xl border border-neutral-200 bg-white transition-opacity dark:border-neutral-800 dark:bg-neutral-950 ${busy ? "opacity-70" : ""}`}>
@@ -68,7 +68,7 @@ export function SubscriberBrowser({ initial, initialRows, initialTotal }: { init
             {rows.length === 0 && <tr><td colSpan={7} className="px-4 py-8 text-center text-neutral-400">No readers match.</td></tr>}
             {rows.map((r) => (
               <tr key={r.id} className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
-                <td className="px-4 py-2"><Link href={`/lookup?email=${encodeURIComponent(r.email)}`} className="font-medium hover:text-coral hover:underline">{r.email}</Link>{r.merged_count > 1 && <span className="ml-2 text-[10px] text-neutral-400">merged ×{r.merged_count}</span>}</td>
+                <td className="px-4 py-2"><Link href={`/lookup?email=${encodeURIComponent(r.email)}`} className="font-medium hover:text-accent hover:underline">{r.email}</Link>{r.merged_count > 1 && <span className="ml-2 text-[10px] text-neutral-400">merged ×{r.merged_count}</span>}</td>
                 <td className="px-4 py-2"><span className="inline-flex items-center gap-1.5"><span className={`h-2 w-2 rounded-full ${TIER_DOT[r.churn_tier ?? ""] ?? "bg-neutral-300"}`} />{r.churn_tier ? TIER_LABEL[r.churn_tier as keyof typeof TIER_LABEL] : "—"}</span></td>
                 <td className="px-4 py-2 tabular-nums">{r.engagement_score ?? "—"}</td>
                 <td className="px-4 py-2 capitalize">{r.status}</td>

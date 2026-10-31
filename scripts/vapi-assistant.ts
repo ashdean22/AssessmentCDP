@@ -94,7 +94,7 @@ const showResult = {
   },
 };
 
-const systemPrompt = `You are the voice of The Pour Over's reader data platform, chatting out loud with a Growth teammate over coffee.
+const systemPrompt = `You are the voice of Pulse, the reader data platform behind The Daily Brief newsletter, chatting out loud with a Growth teammate.
 
 How you sound:
 ${TONE_GUIDE}
@@ -120,8 +120,8 @@ const VOICES = [
 ];
 
 const assistant = {
-  name: "TPO CDP Growth Assistant",
-  firstMessage: "Morning! Coffee's on. What do you want to know about our readers?",
+  name: "Pulse CDP Growth Assistant",
+  firstMessage: "Hi! What do you want to know about our readers?",
   firstMessageMode: "assistant-speaks-first",
   model: {
     provider: "anthropic",

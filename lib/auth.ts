@@ -5,7 +5,7 @@ import { createHmac, timingSafeEqual } from "node:crypto";
  * Token = base64url(expiresAtMs) + "." + HMAC-SHA256(expiresAt, SESSION_SECRET).
  * Nothing secret is stored in the cookie; tampering breaks the signature.
  */
-export const SESSION_COOKIE = "tpo_session";
+export const SESSION_COOKIE = "pulse_session";
 export const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 function secret(): string {

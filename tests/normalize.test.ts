@@ -19,7 +19,7 @@ describe("normalizeEmail", () => {
     expect(normalizeEmail("two@@at.com")).toBeNull();
   });
   it("keeps plus aliases as distinct addresses (documented edge case)", () => {
-    expect(normalizeEmail("name+tpo@gmail.com")).toBe("name+tpo@gmail.com");
+    expect(normalizeEmail("name+news@gmail.com")).toBe("name+news@gmail.com");
   });
 });
 

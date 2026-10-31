@@ -55,7 +55,7 @@ const scenarios: Record<string, () => Promise<void>> = {
     }));
   },
   async duplicate() {
-    const ev = base({ event: "link_click", user_id: "u_2b6447a3", device_id: "d_4b21e8", properties: { url: "https://thepourover.org/podcast" } });
+    const ev = base({ event: "link_click", user_id: "u_2b6447a3", device_id: "d_4b21e8", properties: { url: "https://dailybrief.example/podcast" } });
     await send("first delivery", ev);
     await send("same event_id again (expect duplicate: true)", ev);
   },

@@ -1,6 +1,6 @@
-# TPO Mini CDP
+# Pulse CDP
 
-A small customer data platform for The Pour Over's Growth team. It merges the newsletter, website and app data into one profile per reader, takes live app events over a signed webhook, builds segments, and answers plain-English questions by chat or voice **without the AI ever seeing an email address**.
+A small customer data platform for a newsletter's Growth team. The sample data belongs to *The Daily Brief*, a fictional daily news newsletter. It merges the newsletter, website and app data into one profile per reader, takes live app events over a signed webhook, builds segments, and answers plain-English questions by chat or voice **without the AI ever seeing an email address**.
 
 - **Live:** https://tpo-cdp.vercel.app (password-protected)
 - **Webhook:** `POST https://tpo-cdp.vercel.app/webhooks/app` (HMAC-signed; secret shared out of band)
@@ -103,7 +103,7 @@ The CSVs were profiled before any logic was written; findings and the raw number
 
 **Import result** (idempotent; a second run changes nothing): 2,995 → **2,900 subscribers** (85 merged, 10 rejected), 10,000 web events (8,441 linked via 1,400 stitched visitors), 930 app users (900 linked), 10 issues logged.
 
-**Edge cases not handled, on purpose:** plus-aliases (`name+tpo@gmail.com`) are treated as different people; a shared device or a visitor id used by two people would stitch to whichever email was seen (the data has zero such cases); a subscriber whose email changes is two profiles; app-only users have no newsletter card.
+**Edge cases not handled, on purpose:** plus-aliases (`name+news@gmail.com`) are treated as different people; a shared device or a visitor id used by two people would stitch to whichever email was seen (the data has zero such cases); a subscriber whose email changes is two profiles; app-only users have no newsletter card.
 
 ---
 
@@ -112,8 +112,8 @@ The CSVs were profiled before any logic was written; findings and the raw number
 Authentication is what you'd use in production: **HMAC-SHA256 over `timestamp.body`** with a shared secret, constant-time comparison, a **5-minute replay window** (the timestamp is inside the signature so it can't be swapped), and a **64 KB body cap**. Missing or bad signature → `401`. Payloads are validated with Zod (`event` must be `app_open | read_story | link_click | login`, story slugs must match `^[a-z0-9-]+$`, ids have a fixed charset, unknown keys rejected) → `400`.
 
 ```
-X-TPO-Timestamp: 1759766400                      # unix seconds
-X-TPO-Signature: hex(HMAC_SHA256(secret, "1759766400." + rawBody))
+X-Pulse-Timestamp: 1759766400                      # unix seconds
+X-Pulse-Signature: hex(HMAC_SHA256(secret, "1759766400." + rawBody))
 Content-Type: application/json
 
 {"event_id":"evt_9f3a1c","event":"read_story","user_id":"u_2b6447a3","device_id":"d_4b21e8",
@@ -175,7 +175,7 @@ Shared definitions (also in the system prompt, and the assistant states which it
 - **Subscribers list** (`/subscribers`): every deduped reader; filters apply as you type (tier, status, source, email prefix), sort, paginate, click through to the profile. The URL stays shareable.
 - **Lookup autocomplete:** prefix suggestions as you type (min 2 characters, max 8 results) from `/api/subscribers/suggest`, behind the login and never near the model.
 - **ⓘ hints** on every section explaining what it does.
-- **The Pour Over's voice everywhere:** one tone guide (`lib/tone.ts`) feeds the chat prompt, the voice assistant and the win-back drafts. The UI uses the site's Poppins type, coral accent and espresso text.
+- **One voice everywhere:** one tone guide (`lib/tone.ts`) feeds the chat prompt, the voice assistant and the win-back drafts. The UI uses Inter, an indigo accent and near-black text on cool greys.
 - **Dashboard:** readers, % active, % cold, app users, events today; churn-tier bar; signups by source; readers by last-open week (labelled honestly: the data holds one last-open date per reader, not every open); signups by week; first pages for new subscribers; a live feed of the newest webhook arrivals.
 - **Engagement score and churn risk** (`lib/score.ts`): recency up to 40 (opened ≤7d 40, ≤30d 25, ≤60d 10) + 5 per web visit in 30 days (max 30) + 3 per app event in 30 days (max 30). Tiers: Active 70+, Cooling 40–69, At risk 15–39, Cold <15. Plain rules, recomputed on every event.
 - **Reach out before they're gone:** one click saves the At-risk segment; the AI drafts a win-back email from **aggregates only** (`lib/winback.ts`; the exact stats are shown next to the draft); copy it or push the segment.

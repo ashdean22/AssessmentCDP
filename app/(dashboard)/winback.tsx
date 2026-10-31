@@ -36,7 +36,7 @@ export function WinBack({ count, filter, name }: { count: number; filter: Filter
   const copy = () => { navigator.clipboard?.writeText(draft?.draft ?? ""); setNotice("Copied."); };
 
   return (
-    <section className="rounded-xl border border-coral/40 bg-coral-soft/40 p-5 dark:border-coral/40 dark:bg-coral/10">
+    <section className="rounded-xl border border-accent/40 bg-accent-soft/40 p-5 dark:border-accent/40 dark:bg-accent/10">
       <div className="flex flex-wrap items-center gap-3">
         <div>
           <h2 className="flex items-center gap-1.5 text-sm font-medium text-neutral-500">Reach out before they&apos;re gone <Info text="At-risk readers are cooling but not gone. Save them as a segment in one click, let the AI draft a win-back email from aggregate stats only (it never sees who they are), then copy it or push the list to beehiiv (mock)." /></h2>

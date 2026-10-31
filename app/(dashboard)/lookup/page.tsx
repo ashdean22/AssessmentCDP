@@ -5,7 +5,7 @@ import { SearchBox } from "./search-box";
 import { Info } from "../info";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Lookup · TPO CDP" };
+export const metadata = { title: "Lookup · Pulse CDP" };
 
 function fmtDate(d: string | null) {
   return d ? d.slice(0, 10) : "—";

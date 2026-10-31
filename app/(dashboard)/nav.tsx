@@ -21,7 +21,7 @@ export function Nav() {
           <Link
             key={n.href}
             href={n.href}
-            className={`rounded-full px-3 py-1.5 transition-colors ${active ? "bg-espresso text-white dark:bg-white dark:text-neutral-900" : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-white"}`}
+            className={`rounded-full px-3 py-1.5 transition-colors ${active ? "bg-ink text-white dark:bg-white dark:text-neutral-900" : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-white"}`}
           >
             {n.label}
           </Link>

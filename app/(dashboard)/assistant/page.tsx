@@ -1,7 +1,7 @@
 import { Chat } from "./chat";
 import { Info } from "../info";
 
-export const metadata = { title: "Assistant · TPO CDP" };
+export const metadata = { title: "Assistant · Pulse CDP" };
 
 export default function AssistantPage() {
   return (

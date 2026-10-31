@@ -49,7 +49,7 @@ export function SearchBox({ initial }: { initial: string }) {
           autoFocus
           autoComplete="off"
           aria-autocomplete="list"
-          className="w-full rounded-full border border-neutral-300 bg-white px-4 py-2.5 text-sm outline-none focus:border-espresso dark:border-neutral-700 dark:bg-neutral-950 dark:focus:border-neutral-200"
+          className="w-full rounded-full border border-neutral-300 bg-white px-4 py-2.5 text-sm outline-none focus:border-ink dark:border-neutral-700 dark:bg-neutral-950 dark:focus:border-neutral-200"
         />
         {open && items.length > 0 && (
           <ul role="listbox" className="absolute left-0 right-0 top-full z-20 mt-1 overflow-hidden rounded-2xl border border-neutral-200 bg-white text-sm shadow-lg dark:border-neutral-800 dark:bg-neutral-950">
@@ -66,7 +66,7 @@ export function SearchBox({ initial }: { initial: string }) {
           </ul>
         )}
       </div>
-      <button className="rounded-full bg-espresso px-5 py-2.5 text-sm font-medium text-white hover:bg-neutral-700 dark:bg-white dark:text-neutral-900">Search</button>
+      <button className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-white hover:bg-neutral-700 dark:bg-white dark:text-neutral-900">Search</button>
     </form>
   );
 }

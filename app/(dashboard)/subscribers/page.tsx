@@ -4,7 +4,7 @@ import { Info } from "../info";
 import { SubscriberBrowser } from "./browser";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Subscribers · TPO CDP" };
+export const metadata = { title: "Subscribers · Pulse CDP" };
 
 export default async function SubscribersPage({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
   const params = parseListParams(await searchParams);

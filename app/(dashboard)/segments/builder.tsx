@@ -127,7 +127,7 @@ export function SegmentBuilder({
           <div className="min-w-0 flex-1 text-sm text-neutral-600 dark:text-neutral-400">
             {error ? <span className="text-red-600">{error}</span> : <>
               <div className="font-medium text-neutral-800 dark:text-neutral-100">{plain}</div>
-              {named && <div className="mt-0.5 text-xs text-coral">{named}</div>}
+              {named && <div className="mt-0.5 text-xs text-accent">{named}</div>}
               <div className="mt-0.5 text-xs text-neutral-400">ran: {description}</div>
             </>}
           </div>
@@ -138,7 +138,7 @@ export function SegmentBuilder({
           <BeehiivPush filter={filter} name={name || description.slice(0, 80) || "segment"} className={primaryBtn} />
           {notice && <span className="text-xs text-emerald-600">{notice}</span>}
           {confirming && (
-            <div className="basis-full rounded-xl border border-coral/40 bg-coral-soft/40 p-3 text-sm dark:bg-coral/10">
+            <div className="basis-full rounded-xl border border-accent/40 bg-accent-soft/40 p-3 text-sm dark:bg-accent/10">
               <div className="font-medium">Save this segment?</div>
               <div className="mt-1 text-neutral-700 dark:text-neutral-300">“{name.trim() || description.slice(0, 80)}”: {plain} {count !== null && <b>{count.toLocaleString()} readers right now.</b>}</div>
               <div className="mt-2 flex gap-2">

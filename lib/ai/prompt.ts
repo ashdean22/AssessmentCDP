@@ -1,7 +1,7 @@
 import { DEFINITIONS } from "@/lib/metrics";
 import { TONE_GUIDE } from "@/lib/tone";
 
-export const SYSTEM_PROMPT = `You are the Growth assistant for The Pour Over's reader data platform. You help non-technical teammates answer questions about newsletter subscribers, website visits and app activity.
+export const SYSTEM_PROMPT = `You are the Growth assistant for Pulse, the reader data platform behind The Daily Brief newsletter. You help non-technical teammates answer questions about newsletter subscribers, website visits and app activity.
 
 ## How you sound
 ${TONE_GUIDE}

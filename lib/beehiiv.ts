@@ -52,10 +52,10 @@ export function subscriptionBody(row: PushRow, segmentName: string): BeehiivSubs
     reactivate_existing: false,
     send_welcome_email: false,
     utm_source: row.source,
-    utm_medium: "tpo-cdp",
+    utm_medium: "pulse-cdp",
     utm_campaign: campaignSlug(segmentName),
     custom_fields: [
-      { name: "tpo_segment", value: segmentName },
+      { name: "pulse_segment", value: segmentName },
       { name: "churn_tier", value: row.churn_tier ?? "" },
       { name: "engagement_score", value: row.engagement_score == null ? "" : String(row.engagement_score) },
     ],

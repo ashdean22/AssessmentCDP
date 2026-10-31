@@ -5,7 +5,7 @@ import { Info } from "../info";
 import { CHURN_TIERS, TIER_LABEL, type ChurnTier } from "@/lib/score";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Segments · TPO CDP" };
+export const metadata = { title: "Segments · Pulse CDP" };
 
 const DEFAULT_FILTER: Filter = {
   op: "AND",

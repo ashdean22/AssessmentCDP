@@ -24,8 +24,8 @@ describe("beehiiv mock push", () => {
     const b = subscriptionBody(rows[1], "At risk readers");
     expect(b).toEqual({
       email: "bob@example.com", reactivate_existing: false, send_welcome_email: false,
-      utm_source: "google", utm_medium: "tpo-cdp", utm_campaign: "at-risk-readers",
-      custom_fields: [{ name: "tpo_segment", value: "At risk readers" }, { name: "churn_tier", value: "" }, { name: "engagement_score", value: "" }],
+      utm_source: "google", utm_medium: "pulse-cdp", utm_campaign: "at-risk-readers",
+      custom_fields: [{ name: "pulse_segment", value: "At risk readers" }, { name: "churn_tier", value: "" }, { name: "engagement_score", value: "" }],
     });
     expect(campaignSlug("  Weird!! Name ")).toBe("weird-name");
     expect(campaignSlug("!!!")).toBe("segment");

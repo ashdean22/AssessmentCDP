@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: ["400", "500", "600"] });
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "TPO Mini CDP",
+  title: "Pulse CDP",
   description: "One profile per reader: newsletter, web and app.",
 };
 
@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 // local `next dev`/`next build`, so relying on it broke `tsc` in CI.
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${poppins.variable} h-full antialiased`}>
-      <body className="tpo-bg min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+      <body className="app-bg min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

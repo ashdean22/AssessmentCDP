@@ -4,14 +4,14 @@ import { WEBHOOK_MAX_AGE_SECONDS } from "@/lib/config";
 /**
  * Request signing for POST /webhooks/app.
  *
- *   X-TPO-Timestamp: <unix seconds>
- *   X-TPO-Signature: hex( HMAC-SHA256( secret, `${timestamp}.${rawBody}` ) )
+ *   X-Pulse-Timestamp: <unix seconds>
+ *   X-Pulse-Signature: hex( HMAC-SHA256( secret, `${timestamp}.${rawBody}` ) )
  *
  * Binding the timestamp into the signature stops replaying an old capture
  * with a fresh timestamp; the 5-minute window stops replaying it as-is.
  */
-export const SIG_HEADER = "x-tpo-signature";
-export const TS_HEADER = "x-tpo-timestamp";
+export const SIG_HEADER = "x-pulse-signature";
+export const TS_HEADER = "x-pulse-timestamp";
 export const MAX_BODY_BYTES = 64 * 1024;
 
 export function signPayload(secret: string, timestamp: string | number, rawBody: string): string {
